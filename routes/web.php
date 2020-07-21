@@ -26,3 +26,4 @@ Route::get('/character/new','CharacterController@novo')->name('character.novo');
 Route::post('/character/add','CharacterController@addCharacter')->name('Character.add');
 Route::get('/character/edit/{id}','CharacterController@edit')->name('character.edit');
 Route::post('/character/update/{id}','CharacterController@update')->name('character.update');
+Route::get('/character/delete/{id}','CharacterController@delete')->name('character.delete');

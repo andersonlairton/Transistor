@@ -33,8 +33,6 @@ class CharacterController extends Controller
         return redirect()
             ->action('CharacterController@list')
             ->withSuccess('Personagem editado com sucesso');
-        //var_dump($p);
-        //echo 'chegou no update';
     }
 
     public function list()
@@ -49,9 +47,14 @@ class CharacterController extends Controller
         return view('characters/new')->withCharacter($character);
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $character = Character::find($id);
+        $character->delete($id);
 
+        return redirect()
+            ->action('CharacterController@list')
+            ->withSuccess('Personagem deletado com sucesso');
     }
     
 }

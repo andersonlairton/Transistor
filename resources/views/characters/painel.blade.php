@@ -32,13 +32,23 @@
                                 <p class="card-text">{{$p->frase_characters}}</p>
                                 <p class="card-text">{{$p->characters_description}}</p>
                                 <a href="{{action('CharacterController@edit',$p->id)}}" class="btn btn-secondary">Editar</a>
-                                <a href="#" class="btn btn-danger">Excluir</a>
+                                <a href="#" class="btn btn-danger" onclick="js:btnExcluir('{{$p->id}}')">Excluir</a>
                             </div>
                         </div>
                     @endforeach
         
                 </div>
             </div>
+            <script type="text/javascript">
+                function btnExcluir($id){
+                    let redirect = "{{action('CharacterController@delete',['id'=>':id'])}}";
+                    redirect = redirect.replace(":id",$id);
+                    $direct = confirm("Deseja remover este post?");
+                    if($direct == true){
+                        location.href = redirect;
+                    }
+                }
+            </script>
            
            @endif
        </div>
