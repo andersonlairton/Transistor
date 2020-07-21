@@ -31,7 +31,7 @@
                                 <h5 class="card-title">{{$p->characters_name}}</h5>
                                 <p class="card-text">{{$p->frase_characters}}</p>
                                 <p class="card-text">{{$p->characters_description}}</p>
-                                <a href="#" class="btn btn-secondary">Editar</a>
+                                <a href="{{action('CharacterController@edit',$p->id)}}" class="btn btn-secondary">Editar</a>
                                 <a href="#" class="btn btn-danger">Excluir</a>
                             </div>
                         </div>

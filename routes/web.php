@@ -24,3 +24,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/character','CharacterController@list')->name('character.list');
 Route::get('/character/new','CharacterController@novo')->name('character.novo');
 Route::post('/character/add','CharacterController@addCharacter')->name('Character.add');
+Route::get('/character/edit/{id}','CharacterController@edit')->name('character.edit');
+Route::post('/character/update/{id}','CharacterController@update')->name('character.update');

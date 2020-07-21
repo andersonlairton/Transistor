@@ -6,7 +6,14 @@
 
 <body>
     <div class="container">
-        <div class="card-body">
+        <div class="card">
+            <div class="card-header">
+                @if(empty($character))
+                    Novo
+                @else
+                    Editar {{$character->characters_name}}
+                @endif
+            </div>
             @if(count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -18,27 +25,27 @@
             @endif
 
 
-            <form action="{{route('Character.add')}}" method="POST">
+            <form action="{{empty($character)?route('Character.add'):action('CharacterController@update',$character->id)}}" method="POST">
                 @csrf
 
                 <div class="col-md-12 col-sm-12">
                     <label>Nome:</label>
-                    <input type="text" class="form-control" id="characters_name" name="characters_name" value="{{!empty($post->characters_name)?$post->characters_name:old('characters_name')}}">
+                    <input type="text" class="form-control" name="characters_name" value="{{!empty($character->characters_name)?$character->characters_name:old('characters_name')}}">
                 </div>
 
                 <div class="col-md-12 col-sm-12">
                     <label>Frase:</label>
-                    <input type="text" class="form-control" id="frase_characters" name="frase_characters" value="{{!empty($post->frase_characters)?$post->frase_characters:old('frase_characters')}}">
+                    <input type="text" class="form-control"  name="frase_characters" value="{{!empty($character->frase_characters)?$character->frase_characters:old('frase_characters')}}">
                 </div>
 
                 <div class="col-md-12 col-sm-12">
                     <label>Descrição:</label>
-                    <textarea type="text" class="form-control" id="characters_description" name="characters_description" value="{{!empty($post->characters_description)?$post->characters_description:old('characters_description')}}"></textarea>
+                    <textarea class="form-control" name="characters_description" rows="3">{{!empty($character->characters_description)?$character->characters_description:old('characters_description')}}</textarea>
+                    
                 </div>
-
-                <div class="col-md-12 col-sm-12">
-                    <button class="btn btn-success" id='btn_cadastrar'>Cadastrar Personagem</button>
-                </div>
+                
+                <button type="submit" class="btn btn-success">Salvar</button>
+                
 
             </form>
 

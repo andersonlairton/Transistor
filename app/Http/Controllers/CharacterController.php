@@ -26,9 +26,15 @@ class CharacterController extends Controller
         }
     }
 
-    public function update()
+    public function update(CharacterRequest $p)
     {
-
+        $character = Character::find($p->id);
+        $character->update($p->all());
+        return redirect()
+            ->action('CharacterController@list')
+            ->withSuccess('Personagem editado com sucesso');
+        //var_dump($p);
+        //echo 'chegou no update';
     }
 
     public function list()
@@ -37,9 +43,10 @@ class CharacterController extends Controller
         return view('characters/painel')->withCharacters($character);
     }
 
-    public function edit()
+    public function edit($id)
     {
-
+        $character = Character::find($id);
+        return view('characters/new')->withCharacter($character);
     }
 
     public function delete()
