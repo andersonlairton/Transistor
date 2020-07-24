@@ -27,3 +27,10 @@ Route::post('/character/add','CharacterController@addCharacter')->name('Characte
 Route::get('/character/edit/{id}','CharacterController@edit')->name('character.edit');
 Route::post('/character/update/{id}','CharacterController@update')->name('character.update');
 Route::get('/character/delete/{id}','CharacterController@delete')->name('character.delete');
+
+Route::get('/game','GameController@list')->name('game.list');
+Route::get('/game/new','GameController@novo')->name('game.novo');
+Route::post('/game/add','GameController@gameCharacter')->name('game.add');
+Route::post('/game/update/{id}','GameController@update')->name('game.update');
+Route::get('/game/edit/{id}','GameController@edit')->name('game.edit');
+Route::get('/game/delete/{id}','GameController@delete')->name('game.delete');
