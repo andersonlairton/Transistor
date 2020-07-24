@@ -25,7 +25,7 @@
             @endif
 
 
-            <form action="{{empty($character)?route('Character.add'):action('CharacterController@update',$character->id)}}" method="POST">
+            <form action="{{empty($character)?route('Character.add'):action('CharacterController@update',$character->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="col-md-12 col-sm-12">
@@ -43,8 +43,22 @@
                     <textarea class="form-control" name="characters_description" rows="3">{{!empty($character->characters_description)?$character->characters_description:old('characters_description')}}</textarea>
                     
                 </div>
+
+                <div class="col-md-12 col-sm-12">
+                    <label>Game:</label>
+                    <input type="text" class="form-control" name="game" value="{{!empty($character->game)?$character->game:old('game')}}">
+                </div>
+
+
+                <div class="col-md-12 col-sm-12">
+                    <label >Imagem</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
                 
-                <button type="submit" class="btn btn-success">Salvar</button>
+                <div class="col-md-12 col-sm-12">
+                    <label ></label>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
                 
 
             </form>
