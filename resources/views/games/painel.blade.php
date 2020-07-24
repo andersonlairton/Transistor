@@ -1,5 +1,3 @@
-{{$game}}
-
 @extends('layouts.app')
 
 @section('title','painel')

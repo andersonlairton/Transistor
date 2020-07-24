@@ -27,7 +27,7 @@ class GameRequest extends FormRequest
             'game_name'=>'required|min:10|max:255',
             'game_phrase'=>'required|min:10|max:255',
             'theme_highlight_text'=>'required|min:10|max:255',
-            'background_image'=>'required|image'
+            //'background_image'=>'required|image'
 
         ];
     }
