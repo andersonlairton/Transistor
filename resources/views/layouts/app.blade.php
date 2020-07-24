@@ -59,6 +59,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="{{route('game.list')}}" class="dropdown-item">Games</a>
+                                    <a href="{{route('character.list')}}" class="dropdown-item">Personagens</a>    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
