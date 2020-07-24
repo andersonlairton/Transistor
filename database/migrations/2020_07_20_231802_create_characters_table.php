@@ -19,6 +19,8 @@ class CreateCharactersTable extends Migration
             $table->string('characters_name',255)->unique();
             $table->string('frase_characters',100);
             $table->string('characters_description',255);
+            $table->binary('image');
+            $table->bigInteger('game');
 
             
         });

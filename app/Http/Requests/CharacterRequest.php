@@ -26,7 +26,8 @@ class CharacterRequest extends FormRequest
         return [
             'frase_characters'=>'required|min:10|max:100',
             'characters_description'=>'required|min:10|max:250',
-            'characters_name'=>'required|min:10|max:255'
+            'characters_name'=>'required|min:10|max:255',
+            'image'=>'required|image'           
 
         ];
     }
