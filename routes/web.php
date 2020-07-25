@@ -21,16 +21,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/character','CharacterController@list')->name('character.list');
-Route::get('/character/new','CharacterController@novo')->name('character.novo');
-Route::post('/character/add','CharacterController@addCharacter')->name('Character.add');
-Route::get('/character/edit/{id}','CharacterController@edit')->name('character.edit');
-Route::post('/character/update/{id}','CharacterController@update')->name('character.update');
-Route::get('/character/delete/{id}','CharacterController@delete')->name('character.delete');
+Route::group(['prefix'=>'character'],function(){
+    Route::get('/','CharacterController@list')->name('character.list')->middleware('auth');
+    Route::get('/new','CharacterController@novo')->name('character.novo')->middleware('auth');
+    Route::post('/add','CharacterController@addCharacter')->name('Character.add')->middleware('auth');
+    Route::get('/edit/{id}','CharacterController@edit')->name('character.edit')->middleware('auth');
+    Route::post('/update/{id}','CharacterController@update')->name('character.update')->middleware('auth');
+    Route::get('/delete/{id}','CharacterController@delete')->name('character.delete')->middleware('auth');
+});
 
-Route::get('/game','GameController@list')->name('game.list');
-Route::get('/game/new','GameController@novo')->name('game.novo');
-Route::post('/game/add','GameController@gameCharacter')->name('game.add');
-Route::post('/game/update/{id}','GameController@update')->name('game.update');
-Route::get('/game/edit/{id}','GameController@edit')->name('game.edit');
-Route::get('/game/delete/{id}','GameController@delete')->name('game.delete');
+Route::group(['prefix'=>'game'],function(){
+    Route::get('/','GameController@list')->name('game.list')->middleware('auth');
+    Route::get('/new','GameController@novo')->name('game.novo')->middleware('auth');
+    Route::post('/add','GameController@gameCharacter')->name('game.add')->middleware('auth');
+    Route::post('/update/{id}','GameController@update')->name('game.update')->middleware('auth');
+    Route::get('/edit/{id}','GameController@edit')->name('game.edit')->middleware('auth');
+    Route::get('/delete/{id}','GameController@delete')->name('game.delete')->middleware('auth');
+});
