@@ -20,7 +20,11 @@ class CreateCharactersTable extends Migration
             $table->string('frase_characters',100);
             $table->string('characters_description',255);
             $table->binary('image');
-            $table->bigInteger('game');
+            $table->bigInteger('game')->unsigned();
+            $table->foreign('game')
+                ->references('id')
+                ->on('games')
+                ->onDelete('CASCADE');
 
             
         });
