@@ -12,7 +12,15 @@ class CharacterController extends Controller
 {
     public function novo()
     {
-        return view('characters/new')->withGames($this->listGames());
+        $g = $this->listGames();
+
+        if($g->isEmpty()){
+            return redirect()
+            ->action('GameController@novo')
+            ->withErrors('Não ha games cadastrados,inicialmente cadastre o game para cadastrar o personagem');
+        }else{
+            return view('characters/new')->withGames($g);
+        }
     }
 
     public function listGames()
