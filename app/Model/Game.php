@@ -8,5 +8,5 @@ class Game extends Model
 {
     protected $table='games';
     public $timestamps=true;
-    protected $fillable=['game_name','game_pharase','theme_highlight_text','background_image'];
+    protected $fillable=['game_name','game_phrase','theme_highlight_text','background_image'];
 }
