@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CharacterRequest;
 use App\Model\Character;
+use App\Model\Game;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,12 @@ class CharacterController extends Controller
 {
     public function novo()
     {
-        return view('characters/new');
+        return view('characters/new')->withGames($this->listGames());
+    }
+
+    public function listGames()
+    {
+        return Game::all();
     }
 
     public function addCharacter(CharacterRequest $p)
@@ -44,7 +50,9 @@ class CharacterController extends Controller
     public function edit($id)
     {
         $character = Character::find($id);
-        return view('characters/new')->withCharacter($character);
+        return view('characters/new')
+            ->withCharacter($character)
+            ->withGames($this->listGames());
     }
 
     public function delete($id)
