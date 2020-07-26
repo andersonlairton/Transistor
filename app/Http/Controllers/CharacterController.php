@@ -57,6 +57,12 @@ class CharacterController extends Controller
         return $file;
     }
     
+    public function gameCharacter($id)
+    {
+        $character = Character::where('game',$id)->get();
+        return view('characters/painel')->withCharacters($character);
+    }
+
     public function update(UpdateCharacterRequest $p)
     {
         $data = $p->all();

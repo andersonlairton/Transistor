@@ -32,6 +32,7 @@
                         <p class="card-text">{{$g->theme_highlight_text}}</p>
                         <a href="{{action('GameController@edit',$g->id)}}" class="btn btn-secondary">Editar</a>
                         <a href="#" class="btn btn-danger" onclick="js:btnExcluir('{{$g->id}}')">Excluir</a>
+                        <a href="{{route('character.gameCharacter',$g->id)}}" class="btn btn-primary">Ver Personagens</a>
                         <p class="card-text"></p>
                     </div>
                 </div>

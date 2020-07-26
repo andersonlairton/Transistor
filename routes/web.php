@@ -28,6 +28,7 @@ Route::group(['prefix'=>'character'],function(){
     Route::get('/edit/{id}','CharacterController@edit')->name('character.edit')->middleware('auth');
     Route::post('/update/{id}','CharacterController@update')->name('character.update')->middleware('auth');
     Route::get('/delete/{id}','CharacterController@delete')->name('character.delete')->middleware('auth');
+    Route::get('/{id}','CharacterController@gameCharacter')->name('character.gameCharacter')->middleware('auth');
 });
 
 Route::group(['prefix'=>'game'],function(){
