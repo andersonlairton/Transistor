@@ -15,11 +15,6 @@ class GameController extends Controller
         return view('games/painel')->withGame($game);
     }
 
-    public function novo()
-    {
-        return view('games/new');
-    }
-
     public function searchGame($id)
     {
         $game = Game::find($id);

@@ -32,9 +32,10 @@ Route::group(['prefix'=>'character'],function(){
 
 Route::group(['prefix'=>'game'],function(){
     Route::get('/','GameController@list')->name('game.list')->middleware('auth');
-    Route::get('/new','GameController@novo')->name('game.novo')->middleware('auth');
+    Route::view('/new','games/new')->name('game.novo')->middleware('auth');;
     Route::post('/add','GameController@gameCharacter')->name('game.add')->middleware('auth');
     Route::post('/update/{id}','GameController@update')->name('game.update')->middleware('auth');
     Route::get('/edit/{id}','GameController@edit')->name('game.edit')->middleware('auth');
     Route::get('/delete/{id}','GameController@delete')->name('game.delete')->middleware('auth');
 });
+
