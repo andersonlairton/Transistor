@@ -58,6 +58,9 @@
                 <div class="col-md-12 col-sm-12">
                     <label>Imagem</label>
                     <input type="file" name="image" class="form-control" value="{{!empty($character->image)?$character->image:old('image')}}">
+                    @if(!empty($character->image))
+                        <img src="{{env('APP_URL')}}/storage/{{$character->image}}" name="image">
+                    @endif
                 </div>
 
                 <div class="col-md-12 col-sm-12">

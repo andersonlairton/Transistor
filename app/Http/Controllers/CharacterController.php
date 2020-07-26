@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CharacterRequest;
+use App\Http\Requests\UpdateCharacterRequest;
 use App\Model\Character;
 use App\Model\Game;
 use Exception;
@@ -55,11 +56,16 @@ class CharacterController extends Controller
         $file = $image->store('characters');   
         return $file;
     }
-    public function update(CharacterRequest $p)
+    
+    public function update(UpdateCharacterRequest $p)
     {
         $data = $p->all();
         $character = Character::find($p->id);
-        $data['image'] = $this->imageUpload($p->image);
+        
+        if(!empty($data['image'])){
+            $data['image'] = $this->imageUpload($p->image);
+        }
+
         $character->update($data);
         return redirect()
             ->action('CharacterController@list')
