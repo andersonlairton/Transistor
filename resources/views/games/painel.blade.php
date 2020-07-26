@@ -27,7 +27,7 @@
                 <div class="col-sm-4">
                     <div class="card-body">
                         <h5 class="card-title">{{$g->game_name}}</h5>
-                        <img src="{{$g->background_image}}" alt="Imagem do game" class="card-img-top">
+                        <img src="{{env('APP_URL')}}/storage/{{$g->background_image}}" alt="Imagem do game" class="card-img-top">
                         <p class="card-text">{{$g->game_phrase}}</p>
                         <p class="card-text">{{$g->theme_highlight_text}}</p>
                         <a href="{{action('GameController@edit',$g->id)}}" class="btn btn-secondary">Editar</a>

@@ -43,6 +43,9 @@
                 
                 <div class="col-md-12 col-sm-12">
                     <label>Imagem do game</label>
+                    @if(!empty($game->background_image))
+                    <img src="{{env('APP_URL')}}/storage/{{$game->background_image}}" name="background_image">
+                    @endif
                     <input type="file" class="form-control" name="background_image">
                 </div>
 
