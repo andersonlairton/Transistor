@@ -16,7 +16,7 @@ class CharacterController extends Controller
 
         if ($g->isEmpty()) {
             return redirect()
-                ->action('GameController@novo')
+                ->route('game.novo')
                 ->withErrors('Não ha games cadastrados,inicialmente cadastre o game para cadastrar o personagem');
         } else {
             return view('characters/new')->withGames($g);
@@ -30,10 +30,9 @@ class CharacterController extends Controller
 
     public function addCharacter(CharacterRequest $p)
     {
-        $p->file('image')->store('characters'); //definindo diretorio onde a imagem é salva
+        
+        $file = $this->imageUpload($p->file('image'));
 
-        $file = $p->allFiles()['image'];
-        $p->image = $file->store('characters');
 
         try {
             $personagem = new Character();
@@ -41,7 +40,7 @@ class CharacterController extends Controller
             $personagem->frase_characters = $p->frase_characters;
             $personagem->characters_description = $p->characters_description;
             $personagem->game = $p->game;
-            $personagem->image = $file->store('characters');
+            $personagem->image = $file;
             $personagem->save();
 
             return redirect()
@@ -51,11 +50,17 @@ class CharacterController extends Controller
             return ['erro' => $erro];
         }
     }
-
+    public function imageUpload($image)
+    {
+        $file = $image->store('characters');   
+        return $file;
+    }
     public function update(CharacterRequest $p)
     {
+        $data = $p->all();
         $character = Character::find($p->id);
-        $character->update($p->all());
+        $data['image'] = $this->imageUpload($p->image);
+        $character->update($data);
         return redirect()
             ->action('CharacterController@list')
             ->withSuccess('Personagem editado com sucesso');

@@ -29,7 +29,7 @@
                         <div class="col-sm-4">
                             <div class="card-body">
                                 <h5 class="card-title">{{$p->characters_name}}</h5>
-                                <img class="card-img-top" src="{{$p->image}}" alt="Imagem de capa do card">
+                                <img class="card-img-top" src="{{env('APP_URL')}}/storage/{{$p->image}}" alt="Imagem de capa do card">
                                 <p class="card-text">{{$p->frase_characters}}</p>
                                 <p class="card-text">{{$p->characters_description}}</p>
                                 <a href="{{action('CharacterController@edit',$p->id)}}" class="btn btn-secondary">Editar</a>
