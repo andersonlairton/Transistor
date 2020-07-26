@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GameRequest;
+use App\Http\Requests\UpdatGameRequest;
 use App\Model\Game;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,10 +22,19 @@ class GameController extends Controller
         return $game;
     }
 
+    public function uploadImagem($image)
+    {
+        $file = $image->store('games');
+        return $file;
+    }
+
     public function gameCharacter(GameRequest $g)
     {
+        $data = $g->all();
+        $data['background_image'] = $this->uploadImagem($g->file('background_image'));
+        
         try {
-            Game::create($g->all());
+            Game::create($data);
             return redirect()
                 ->action('GameController@list')
                 ->withSuccess('Game cadastrado com sucesso');
@@ -38,10 +48,14 @@ class GameController extends Controller
         return view('games/new')->withGame($this->searchGame($id));
     }
 
-    public function update(GameRequest $g)
+    public function update(UpdatGameRequest $g)
     {
         $game = $this->searchGame($g->id);
-        $game->update($g->all());
+        $data = $g->all();
+        if(!empty($data['background_image'])){
+            $data['background_image'] = $this->uploadImagem($g->file('background_image'));
+        }
+        $game->update($data);
         return redirect()
             ->action('GameController@list')
             ->withSuccess('Game editado com sucesso');
