@@ -14,11 +14,11 @@ class CharacterController extends Controller
     {
         $g = $this->listGames();
 
-        if($g->isEmpty()){
+        if ($g->isEmpty()) {
             return redirect()
-            ->action('GameController@novo')
-            ->withErrors('Não ha games cadastrados,inicialmente cadastre o game para cadastrar o personagem');
-        }else{
+                ->action('GameController@novo')
+                ->withErrors('Não ha games cadastrados,inicialmente cadastre o game para cadastrar o personagem');
+        } else {
             return view('characters/new')->withGames($g);
         }
     }
@@ -30,8 +30,20 @@ class CharacterController extends Controller
 
     public function addCharacter(CharacterRequest $p)
     {
+        $p->file('image')->store('characters'); //definindo diretorio onde a imagem é salva
+
+        $file = $p->allFiles()['image'];
+        $p->image = $file->store('characters');
+
         try {
-            Character::create($p->all());
+            $personagem = new Character();
+            $personagem->characters_name = $p->characters_name;
+            $personagem->frase_characters = $p->frase_characters;
+            $personagem->characters_description = $p->characters_description;
+            $personagem->game = $p->game;
+            $personagem->image = $file->store('characters');
+            $personagem->save();
+
             return redirect()
                 ->action('CharacterController@list')
                 ->withSuccess('Personagem cadastrado com sucesso');
@@ -72,5 +84,4 @@ class CharacterController extends Controller
             ->action('CharacterController@list')
             ->withSuccess('Personagem deletado com sucesso');
     }
-    
 }
